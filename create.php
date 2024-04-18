@@ -1,59 +1,61 @@
 <?php
 // Include config file
-require_once "config.php";
+require_once "../db/config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$product_name = $product_details = $product_retail_price = "";
+$product_name_err = $product_details_err = $product_retail_price_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
-    $input_name = trim($_POST["name"]);
+    $input_name = trim($_POST["product_name"]);
     if(empty($input_name)){
-        $name_err = "Please enter a name.";
+        $product_name_err = "Please enter a name.";
     } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Please enter a valid name.";
+        $product_name_err = "Please enter a valid name.";
     } else{
-        $name = $input_name;
+        $product_name = $input_name;
     }
     
     // Validate address
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = "Please enter an address.";     
+    $input_product_details = trim($_POST["product_details"]);
+    if(empty($input_product_details)){
+        $product_details_err = "Please enter product details.";     
     } else{
-        $address = $input_address;
+        $product_details = $input_product_details;
     }
     
     // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Please enter a positive integer value.";
+    $input_product_retail_price = trim($_POST["product_retail_price"]);
+    if(empty($input_product_retail_price)){
+        $product_retail_price_err = "Please enter the salary amount.";     
+    } elseif(!ctype_digit($input_product_retail_price)){
+        $product_retail_price_err = "Please enter a positive integer value.";
     } else{
-        $salary = $input_salary;
+        $product_retail_price = $input_product_retail_price;
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($product_name_err) && empty($product_details_err) && empty($product_retail_price_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO employees (name, address, salary) VALUES (?, ?, ?)";
-         
-        if($stmt = mysqli_prepare($link, $sql)){
+        $sql = "INSERT INTO products (product_name, product_details, product_retail_price) VALUES (:product_name, :product_details, :product_retail_price)";
+ 
+        if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_address, $param_salary);
+            $stmt->bindParam(":product_name", $param_product_name);
+            $stmt->bindParam(":product_details", $param_product_details);
+            $stmt->bindParam(":product_retail_price", $param_product_retail_price);
             
             // Set parameters
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
+            $param_product_name = $product_name;
+            $param_product_details = $product_details;
+            $param_product_retail_price = $product_retail_price;
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if($stmt->execute()){
                 // Records created successfully. Redirect to landing page
-                header("location: index.php");
+                header("location: ../index.php");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -61,11 +63,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
          
         // Close statement
-        mysqli_stmt_close($stmt);
+        unset($stmt);
     }
     
     // Close connection
-    mysqli_close($link);
+    unset($pdo);
 }
 ?>
  
@@ -91,22 +93,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p>Please fill this form and submit to add employee record to the database.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <label>Product Name</label>
+                            <input type="text" name="product_name" class="form-control <?php echo (!empty($product_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $product_name; ?>">
+                            <span class="invalid-feedback"><?php echo $product_name_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $address_err;?></span>
+                            <label>Product Details</label>
+                            <textarea name="product_details" class="form-control <?php echo (!empty($product_details_err)) ? 'is-invalid' : ''; ?>"><?php echo $product_details; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $product_details_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="invalid-feedback"><?php echo $salary_err;?></span>
+                            <label>Retail Price</label>
+                            <input type="text" name="product_retail_price" class="form-control <?php echo (!empty($product_retail_price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $product_retail_price; ?>">
+                            <span class="invalid-feedback"><?php echo $product_retail_price_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="../index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
