@@ -1,33 +1,35 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["product_id"]) && !empty(trim($_GET["product_id"]))){
+if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
-    require_once "../db/config.php";
+    require_once "config.php";
     
     // Prepare a select statement
-    $sql = "SELECT * FROM products WHERE product_id = :product_id";
+    $sql = "SELECT * FROM employees WHERE id = ?";
     
-    if($stmt = $pdo->prepare($sql)){
+    if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(":product_id", $param_product_id);
+        mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_product_id = trim($_GET["product_id"]);
+        $param_id = trim($_GET["id"]);
         
         // Attempt to execute the prepared statement
-        if($stmt->execute()){
-            if($stmt->rowCount() == 1){
+        if(mysqli_stmt_execute($stmt)){
+            $result = mysqli_stmt_get_result($stmt);
+    
+            if(mysqli_num_rows($result) == 1){
                 /* Fetch result row as an associative array. Since the result set
                 contains only one row, we don't need to use while loop */
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $product_name = $row["product_name"];
-                $product_details = $row["product_details"];
-                $product_retail_price = $row["product_retail_price"];
+                $name = $row["name"];
+                $address = $row["address"];
+                $salary = $row["salary"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
-                header("location: ../public/error.php");
+                header("location: error.php");
                 exit();
             }
             
@@ -37,13 +39,13 @@ if(isset($_GET["product_id"]) && !empty(trim($_GET["product_id"]))){
     }
      
     // Close statement
-    unset($stmt);
+    mysqli_stmt_close($stmt);
     
     // Close connection
-    unset($pdo);
+    mysqli_close($link);
 } else{
     // URL doesn't contain id parameter. Redirect to error page
-    header("location: ../public/error.php");
+    header("location: error.php");
     exit();
 }
 ?>
@@ -66,20 +68,20 @@ if(isset($_GET["product_id"]) && !empty(trim($_GET["product_id"]))){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">View Product Record</h1>
+                    <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Product Name</label>
-                        <p><b><?php echo $row["product_name"]; ?></b></p>
+                        <label>Name</label>
+                        <p><b><?php echo $row["name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Product Details</label>
-                        <p><b><?php echo $row["product_details"]; ?></b></p>
+                        <label>Address</label>
+                        <p><b><?php echo $row["address"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Retail Price</label>
-                        <p><b><?php echo $row["product_retail_price"]; ?></b></p>
+                        <label>Salary</label>
+                        <p><b><?php echo $row["salary"]; ?></b></p>
                     </div>
-                    <p><a href="../index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>
