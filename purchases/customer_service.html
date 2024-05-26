@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Tech - Customer Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #6e0226;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 10px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-method i {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        /* Middle Buttons */
+        .middle-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .middle-buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .middle-buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>AC Tech - Customer Service</h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <div class="contact-method">
+                <i class="fas fa-envelope"></i>
+                <p>Email: support@ACTech.com</p>
+            </div>
+            <div class="contact-method">
+                <i class="fas fa-phone"></i>
+                <p>Phone: 09972959221</p>
+            </div>
+            <div class="contact-method">
+                <i class="fas fa-comments"></i>
+                <p>Live Chat: <a href="#">Click here</a></p>
+            </div>
+        </div>
+
+        <!-- Middle Buttons -->
+        <div class="middle-buttons">
+            <button onclick="redirectToLogistics()">Logistics</button>
+            <button onclick="redirectToReports()">Reports</button>
+        </div>
+    </main>
+
+    <script>
+        function redirectToLogistics() {
+            // Redirect to logistics page
+            window.location.href = "logistics.html";
+        }
+
+        function redirectToReports() {
+            // Redirect to reports page
+            window.location.href = "reports.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Tech - Logistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #6e0226;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .shipment {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .shipment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .shipment-number {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .shipment-status {
+            font-size: 16px;
+            color: #007bff;
+        }
+
+        .shipment-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .shipment-item {
+            padding: 5px 0;
+        }
+
+        .shipment-item i {
+            margin-right: 5px;
+        }
+
+        /* Navigator */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Middle Buttons */
+        .middle-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .middle-buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .middle-buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Shopee Philippines - Logistics</h1>
+    </header>
+
+    <!-- Navigator -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Product Inventory</a></li>
+            <li><a href="payment.html">Payment & Accounting</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="customer_service.html">Customer Service</a></li>
+            <li><a href="reports.html">Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Sample Shipment -->
+        <div class="shipment">
+            <div class="shipment-header">
+                <span class="shipment-number">Order Number: 123456789</span>
+                <span class="shipment-status">In Transit</span>
+            </div>
+            <ul class="shipment-items">
+                <li class="shipment-item"><i class="fas fa-box"></i> Product 1</li>
+                <li class="shipment-item"><i class="fas fa-box"></i> Product 2</li>
+                <li class="shipment-item"><i class="fas fa-box"></i> Product 3</li>
+            </ul>
+        </div>
+
+        <!-- Sample Shipment -->
+        <div class="shipment">
+            <div class="shipment-header">
+                <span class="shipment-number">Order Number: 987654321</span>
+                <span class="shipment-status">Delivered</span>
+            </div>
+            <ul class="shipment-items">
+                <li class="shipment-item"><i class="fas fa-box"></i> Product 4</li>
+                <li class="shipment-item"><i class="fas fa-box"></i> Product 5</li>
+            </ul>
+        </div>
+
+        <!-- Middle Buttons -->
+        <div class="middle-buttons">
+            <button onclick="redirectToCustomerService()">Customer Service</button>
+            <button onclick="redirectToReports()">Reports</button>
+        </div>
+    </main>
+
+    <script>
+        function redirectToCustomerService() {
+            // Redirect to customer service page
+            window.location.href = "customer_service.html";
+        }
+
+        function redirectToReports() {
+            // Redirect to reports page
+            window.location.href = "reports.html";
+        }
+    </script>
+</body>
+</html>
