@@ -1,0 +1,33 @@
+
+.buy-button {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.add-to-cart-button {
+    margin-left: 10px; /* Adjust as needed */
+}
+/* Table styles */
+table {
+    width: 100%;
+}
+
+/* Style each product row */
+tr {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Style table cell (td) */
+td {
+    flex: 1 1 100%; /* Each cell occupies full width */
+    padding: 8px;
+    border-bottom: 1px solid #0012b1;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+

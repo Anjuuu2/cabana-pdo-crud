@@ -11,7 +11,7 @@ define('DB_PASSWORD', '20221190Cabana');
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'opop');
+define('DB_NAME', 'cabana');
  
 try{
     $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);

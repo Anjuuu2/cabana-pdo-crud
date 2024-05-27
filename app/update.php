@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "../../db/config.php";
+require_once "../db/config.php";
  
 // Define variables and initialize with empty values
 $product_name = $product_details = $product_retail_price = "";
@@ -60,7 +60,7 @@ if(isset($_POST["product_id"]) && !empty($_POST["product_id"])){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records updated successfully. Redirect to landing page
-                header("location: ../user/dashboard.php");
+                header("location: index.php");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -101,7 +101,7 @@ if(isset($_POST["product_id"]) && !empty($_POST["product_id"])){
                     $product_retail_price = $row["product_retail_price"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
-                    header("location: ../user/error.php");
+                    header("location: ../app/error.php");
                     exit();
                 }
                 
@@ -117,7 +117,7 @@ if(isset($_POST["product_id"]) && !empty($_POST["product_id"])){
         unset($pdo);
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: ../user/error.php");
+        header("location: ../app/error.php");
         exit();
     }
 }
@@ -159,44 +159,13 @@ if(isset($_POST["product_id"]) && !empty($_POST["product_id"])){
                             <input type="text" name="product_retail_price" class="form-control <?php echo (!empty($product_retail_price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $product_retail_price; ?>">
                             <span class="invalid-feedback"><?php echo $product_retail_price_err;?></span>
                         </div>
-                        
-                        <!--Initialize product id-->
                         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>"/>
-                        
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#saveUpdateChangesModal">
-                            Save Changes
-                        </button>
-                        
-                        <!-- Modal -->
-                        <div class="modal fade" id="saveUpdateChangesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Save changes?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary" value="Submit">
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        <a href="../user/dashboard.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <a href="../index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
         </div>
     </div>
-
-<!--Additional Bootstrap Dependancies-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

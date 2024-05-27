@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment & Accounting</title>
+    <style>
+        /* Resetting default margin and padding for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header and Navigation styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Form container */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Form title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white; /* Set text color to white */
+        }
+
+        /* Form input fields */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: white; /* Set text color to white */
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Payment method container */
+        .payment-method-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-method-container label {
+            font-weight: normal;
+        }
+
+        /* Submit button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body style="background-image: url('https://wallpapercave.com/wp/wp8657140.png'); /* Specify the path to your background image */
+            background-size: cover;
+            background-position: center;">
+    <!-- Header Section -->
+    <header>
+        <!-- Navigation Menu -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Product Inventory</a></li>
+                <li><a href="payment.html">Payment & Accounting</a></li>
+                <li><a href="logistics.html">Logistics</a></li>
+                <li><a href="customer_service.html">Customer Service</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1>Payment Method</h1>
+        <form id="payment-form" action="/submit_payment" method="post">
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Delivery Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="form-group">
+                <label for="product">Product:</label>
+                <select id="product" name="product" onchange="updatePrice()" required>
+                    <option value="">Select Product</option>
+                    <option value="Processor:Intel Core i9-12900K:$544.99">Uraku Misugiri</option>
+                    <option value="Video Card:PowerColor Hellhound Radeon RX 7800 XT:$529.99">Splendor of Tranquil Waters</option>
+                    <option value="Mother Board">Mistsplitter Reforged</option>
+                    <option value="PC Case">Summit Shaper</option>
+                    <option value="RAM">Skyward Blade</option>
+                    <option value="Keyboard">Aquila Favonia</option>
+                    <option value="PSU">Toukabou Shigure</option>
+                    <option value="Liquid Cooler">Xiphos' Moonlight</option>
+                    <option value="Liquid Cooler">Sapwood Blade</option>
+                    <option value="Kagotsurube Isshin">Kagotsurube Isshin</option>
+                    <option value="Sacrificial Sword">Sacrificial Sword</option>
+                    <option value="Cinnabar Spindle">Cinnabar Spindle</option>
+                    <option value="Lion's Roar">Lion's Roar</option>
+                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" onchange="updatePrice()" required>
+            </div>
+            <div class="payment-method-container">
+                <label for="payment-method">Select Payment Method:</label>
+                
+            <div class="payment-method-container">
+                <label for="payment-method">Select Payment Method:</label>
+                <select id="payment-method" name="payment-method">
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+            <input type="hidden" id="total-price" name="total-price">
+            <input type="button" value="Proceed" onclick="redirectToLogistics()">
+        </form>
+    </div>
+
+    <script>
+        function redirectToLogistics() {
+            window.location.href = "logistics.html";
+        }
+    </script>
+</body>
+</html>
+
+
